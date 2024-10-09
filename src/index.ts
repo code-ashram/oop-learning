@@ -1,5 +1,5 @@
-// 4. Create an interface Printable with a method printDetails(). Implement this interface in the Person and Student
-// classes, with each class providing its own implementation of printDetails()
+// 5. Add a static property totalPeople to the Person class to track how many Person objects have been created. Add a
+// static method getTotalPeople() to return this value
 
 interface Printable {
   printDetails(): void;
@@ -8,10 +8,16 @@ interface Printable {
 class Person implements Printable  {
   public name: string;
   protected age: number;
+  private static totalPeople = 0
 
   constructor(name: string, age: number) {
     this.name = name;
     this.age = age;
+    Person.totalPeople++
+  }
+
+  public static getTotalPeople() {
+    return Person.totalPeople
   }
 
   public printDetails(): void {
@@ -39,8 +45,3 @@ class Student extends Person implements Printable {
     return `${super.greet()}. My ID is: #${this.studentId}!`
   }
 }
-
-// const user = new Person('Sachinandan', 37)
-// const student = new Student('Kiryadev', 37, 108)
-//
-// user.printDetails()
