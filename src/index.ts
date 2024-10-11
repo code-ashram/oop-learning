@@ -7,7 +7,7 @@ interface Printable {
 
 class Person implements Printable {
   public name: string;
-  public age: number;
+  protected age: number;
   private static totalPeople = 0
 
   constructor(name: string, age: number) {
@@ -57,5 +57,5 @@ class Student extends Person implements Printable {
 }
 
 const user = new Person('Sachinandan', 37)
-user.age = 23
-console.log(user.age)
+user.userAge = 99
+console.log(user.userAge)
