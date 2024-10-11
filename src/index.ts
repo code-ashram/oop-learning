@@ -1,19 +1,29 @@
-// 5. Add a static property totalPeople to the Person class to track how many Person objects have been created. Add a
-// static method getTotalPeople() to return this value
+// 6. Add a getter and setter for the age property in the Person class, with validation in the setter to ensure the age
+// is non-negative
 
 interface Printable {
   printDetails(): void;
 }
 
-class Person implements Printable  {
+class Person implements Printable {
   public name: string;
-  protected age: number;
+  public age: number;
   private static totalPeople = 0
 
   constructor(name: string, age: number) {
     this.name = name;
     this.age = age;
     Person.totalPeople++
+  }
+
+  public get userAge(): number {
+    return this.age;
+  }
+
+  public set userAge(value: number) {
+    value <= 0
+      ? this.age = 1
+      : this.age = value;
   }
 
   public static getTotalPeople() {
@@ -32,7 +42,7 @@ class Person implements Printable  {
 class Student extends Person implements Printable {
   public readonly studentId: number
 
-  constructor (name: string, age: number, studentId: number) {
+  constructor(name: string, age: number, studentId: number) {
     super(name, age)
     this.studentId = studentId
   }
@@ -46,4 +56,6 @@ class Student extends Person implements Printable {
   }
 }
 
-const testVariable = new Person('Kishor', 37)
+const user = new Person('Sachinandan', 37)
+user.age = 23
+console.log(user.age)
