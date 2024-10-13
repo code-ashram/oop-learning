@@ -1,5 +1,5 @@
-// 6. Add a getter and setter for the age property in the Person class, with validation in the setter to ensure the age
-// is non-negative
+// 7. Create an abstract class Employee with abstract methods getSalary() and work(). Extend this class in Manager and
+// Developer classes, each implementing the abstract methods differently
 
 interface Printable {
   printDetails(): void;
