@@ -7,7 +7,7 @@ interface Printable {
 
 class Person implements Printable {
   public name: string;
-  protected age: number;
+  private age: number;
   private static totalPeople = 0
 
   constructor(name: string, age: number) {
@@ -20,10 +20,12 @@ class Person implements Printable {
     return this.age;
   }
 
-  public set userAge(value: number) {
-    value <= 0
-      ? this.age = 1
-      : this.age = value;
+  public set setUserAge(value: number) {
+    if (value >= 0) {
+      this.age = value;
+    } else {
+      console.log("Age cannot be negative.");
+    }
   }
 
   public static getTotalPeople() {
@@ -57,5 +59,5 @@ class Student extends Person implements Printable {
 }
 
 const user = new Person('Sachinandan', 37)
-user.userAge = 99
+user.setUserAge = -9
 console.log(user.userAge)
