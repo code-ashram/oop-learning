@@ -1,5 +1,5 @@
-// 8. Create a Team class that takes a list of Person objects as a constructor parameter. Add methods to add and remove
-// people from the team
+//9. Add overloaded version of the greet() method in the Person class. One version takes no arguments, and another
+// version takes a message string
 
 interface Printable {
   printDetails(): void;
@@ -36,8 +36,14 @@ class Person implements Printable {
     console.log(`Person ${this.name}`)
   }
 
-  public greet() {
-    return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+  public greet(): string
+
+  public greet(message: string): string
+
+  public greet(message?: string): string {
+    return message
+      ? `I'm ${this.name}! ${message}.`
+      : `Hello, my name is ${this.name} and I am ${this.age} years old.`
   }
 }
 
@@ -57,16 +63,7 @@ class Team {
   }
 }
 
-const people: Person[] = [
-  new Person('Kishor', 37),
-  new Person('Kirill', 36),
-  new Person('Achilles', 2),
-  new Person('Dimas', 34),
-]
+const user = new Person('Achilles', 17)
 
-const team = new Team(people)
-
-team.addPerson(new Person('Andrei', 32))
-team.removePerson('Dimas')
-
-console.log(team)
+console.log(user.greet())
+console.log(user.greet('sdfsdfsdf'))
