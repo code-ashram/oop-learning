@@ -1,5 +1,5 @@
-// 7. Create an abstract class Employee with abstract methods getSalary() and work(). Extend this class in Manager and
-// Developer classes, each implementing the abstract methods differently
+// 8. Create a Team class that takes a list of Person objects as a constructor parameter. Add methods to add and remove
+// people from the team
 
 interface Printable {
   printDetails(): void;
@@ -41,23 +41,32 @@ class Person implements Printable {
   }
 }
 
-class Student extends Person implements Printable {
-  public readonly studentId: number
+class Team {
+  public list: Person[]
 
-  constructor(name: string, age: number, studentId: number) {
-    super(name, age)
-    this.studentId = studentId
+  constructor(list: Person[]) {
+    this.list = list
   }
 
-  public printDetails(): void {
-    console.log(`Student ${this.studentId}`)
+  public addPerson (person: Person) {
+    this.list.push(person)
   }
 
-  public greet() {
-    return `${super.greet()}. My ID is: #${this.studentId}!`
+  public removePerson (personName: string) {
+    this.list = this.list.filter((person) => person.name !== personName)
   }
 }
 
-const user = new Person('Sachinandan', 37)
-user.setUserAge = -9
-console.log(user.userAge)
+const people: Person[] = [
+  new Person('Kishor', 37),
+  new Person('Kirill', 36),
+  new Person('Achilles', 2),
+  new Person('Dimas', 34),
+]
+
+const team = new Team(people)
+
+team.addPerson(new Person('Andrei', 32))
+team.removePerson('Dimas')
+
+console.log(team)
