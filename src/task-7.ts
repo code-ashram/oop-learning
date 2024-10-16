@@ -4,7 +4,7 @@ abstract class Employee {
   id: string
   name: string
 
-  constructor(name: string) {
+  protected constructor(name: string) {
     this.id = crypto.randomUUID()
     this.name = name
   }

@@ -1,5 +1,5 @@
-//9. Add overloaded version of the greet() method in the Person class. One version takes no arguments, and another
-// version takes a message string
+// 10. Create a generic class Storage<T> that can store and retrieve items of any type. Use this class to store string,
+// number and Person objects
 
 interface Printable {
   printDetails(): void;
@@ -20,7 +20,7 @@ class Person implements Printable {
     return this.age;
   }
 
-  public set setUserAge(value: number) {
+  public set userAge(value: number) {
     if (value >= 0) {
       this.age = value;
     } else {
@@ -47,23 +47,46 @@ class Person implements Printable {
   }
 }
 
-class Team {
-  public list: Person[]
+class StorageBox<T> {
+  public storage: T[]
+  private validator: (value: unknown) => boolean
 
-  constructor(list: Person[]) {
-    this.list = list
+  constructor(validator: (value: unknown) => boolean) {
+    this.validator = validator
+    this.storage = []
   }
 
-  public addPerson (person: Person) {
-    this.list.push(person)
+  public addContent(value: T): void {
+    if (!this.validator(value)) {
+      // throw new Error('Invalid item type')
+      console.log('Error!')
+      return
+    }
+
+    this.storage.push(value)
   }
 
-  public removePerson (personName: string) {
-    this.list = this.list.filter((person) => person.name !== personName)
+  public getContent(index: number): T {
+    return this.storage[index]
   }
 }
 
-const user = new Person('Achilles', 17)
+const userValidator = (value: unknown): value is Person => value instanceof Person
+const numberValidator = (value: unknown): value is number => typeof value === 'number'
+const stringValidator = (value: unknown): value is string => typeof value === 'string'
 
-console.log(user.greet())
-console.log(user.greet('sdfsdfsdf'))
+const user = new Person('Kishor', 37)
+const user2 = new Person('Kiryadev', 35)
+
+const strStorage = new StorageBox<string>(stringValidator)
+const numStorage = new StorageBox<number>(numberValidator)
+const personStorage = new StorageBox<Person>(userValidator)
+
+strStorage.addContent('some string')
+numStorage.addContent(2)
+numStorage.addContent(34)
+personStorage.addContent(user)
+
+console.log(strStorage.storage)
+console.log(numStorage.storage)
+console.log(personStorage.storage)
